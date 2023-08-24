@@ -4,7 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Footer from "./Footer";
+import axios from "axios";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useAccount } from "wagmi";
 
 const navigation = [
   { name: "Home", href: "/#home" },
@@ -25,6 +27,7 @@ export default function Layout({ children }) {
     supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
   });
   const [userData, setUserData] = useState(null);
+  const { address } = useAccount();
 
   async function signInWithDiscord() {
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -48,6 +51,24 @@ export default function Layout({ children }) {
       if (profile.data.user != null) {
         setUserData(profile.data.user);
         router.push("/approval");
+      }
+      if (address && profile.data.user != null) {
+        let body = {
+          userAddress: address,
+          discordUsername: profile.data.user?.user_metadata?.name,
+        };
+        await axios
+          .post("https://axbot.surbhitagrawal.repl.co/register", body, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => {
+            console.log("User saved in backend: ", res);
+          })
+          .catch((err) => {
+            console.error("Error saving user in backend: ", err);
+          });
       }
       console.log(profile);
     })();
