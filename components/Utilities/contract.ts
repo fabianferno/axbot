@@ -287,14 +287,36 @@ const ERC20ABI = [
   },
 ];
 
-type Address = `0x${string}`;
+export type Address = `0x${string}`;
 
-interface Contract {
-  address: Address;
+export interface Contract {
+  address: {
+    goerli: Address;
+    "celo-alfajores": Address;
+    "linea-mainnet": Address;
+    matic: Address;
+    avalanche: Address;
+    fantom: Address;
+    celo: Address;
+    arbitrum: Address;
+    optimism: Address;
+    base: Address;
+  };
   abi: any;
 }
 
 export const ERC20: Contract = {
-  address: "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
+  address: {
+    goerli: "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
+    "celo-alfajores": "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
+    "linea-mainnet": "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
+    matic: "0x2c852e740B62308c46DD29B982FBb650D063Bd07",
+    avalanche: "0x57F1c63497AEe0bE305B8852b354CEc793da43bB",
+    fantom: "0x75Cc4fDf1ee3E781C1A3Ee9151D5c6Ce34Cf5C61",
+    celo: "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
+    arbitrum: "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
+    optimism: "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
+    base: "0x254d06f33bDc5b8ee05b2ea472107E300226659A",
+  },
   abi: ERC20ABI,
 };

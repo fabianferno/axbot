@@ -1,10 +1,10 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Layout from "@/components/Utilities/Layout";
-import { useState } from "react";
-import { useContractWrite, useAccount } from "wagmi";
+import { useState, useEffect } from "react";
+import { useContractWrite, useAccount, useNetwork } from "wagmi";
 import { parseEther } from "viem";
 import { ERC20 } from "@/components/Utilities/contract";
-
+import { Address, Contract } from "@/components/Utilities/contract";
 const assets = [
   "aUSDC",
   "wAXL",
@@ -40,6 +40,10 @@ const Form = () => {
   const [selectedAsset, setselectedAsset] = useState(assets[0]);
   const [selectedChain, setSelectedChain] = useState(chainOptions[0]);
   const [amount, setAmount] = useState("0");
+  const { chain } = useNetwork();
+
+  const network: any = chain?.network || "celo-alfajores";
+  let contractAddresses: any = ERC20.address;
 
   const {
     write: approve,
@@ -47,7 +51,7 @@ const Form = () => {
     isError,
     isSuccess,
   } = useContractWrite({
-    address: ERC20.address,
+    address: contractAddresses[network],
     functionName: "approve",
     abi: ERC20.abi,
   });
@@ -57,6 +61,10 @@ const Form = () => {
       args: ["0x3933C2024998Eb96400638B51600309cFfB3196A", parseInt(amount)],
     });
   };
+
+  useEffect(() => {
+    console.log(chain);
+  }, [chain]);
 
   return (
     <Layout>
