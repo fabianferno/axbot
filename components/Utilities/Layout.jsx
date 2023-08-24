@@ -89,7 +89,7 @@ export default function Layout({ children }) {
                     <div className="flex items-center px-2 lg:px-0">
                       <div className="flex-shrink-0 flex items-center gap-x-3">
                         <Image
-                          className="block h-12 w-12"
+                          className="block h-12 w-12 rounded-full"
                           height={1109}
                           width={1115}
                           src="/Logo/512x512_color.png"
