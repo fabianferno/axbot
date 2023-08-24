@@ -3,12 +3,41 @@ import type { AppProps } from "next/app";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { polygonMumbai, goerli } from "wagmi/chains";
+import {
+  goerli,
+  lineaTestnet,
+  linea,
+  polygon,
+  polygonMumbai,
+  avalanche,
+  fantom,
+  celoAlfajores,
+  moonbaseAlpha,
+  celo,
+  arbitrum,
+  optimism,
+  base,
+  filecoin,
+} from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient } = configureChains(
-  [goerli, polygonMumbai],
+  [
+    goerli,
+    celoAlfajores,
+    lineaTestnet,
+    linea,
+    polygon,
+    polygonMumbai,
+    avalanche,
+    fantom,
+    moonbaseAlpha,
+    celo,
+    arbitrum,
+    optimism,
+    base,
+  ],
   [
     alchemyProvider({
       apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY,

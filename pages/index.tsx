@@ -46,7 +46,7 @@ export default function Landing() {
               </div>
               <div className="text-center">
                 <h1 className="text-4xl font-bold tracking-tight dark:text-slate-200 text-gray-900 sm:text-6xl">
-                  Make multi-chain bulk payments with ease!
+                  Discord Bot Wallets
                 </h1>
                 <p className="mt-6 text-lg leading-8 dark:text-slate-200 text-gray-600">
                   Powered by Axelar
